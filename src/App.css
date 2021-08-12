@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+.header {
+  margin-bottom: 30px;
+}
+
+.footer {
+  position: absolute;
+  left: 0;
+  height: 60px;
+  bottom: 0;
+  width: 100%;
+  padding-top: 5px;
+  background-color: lightgray;
+}
+
+.bookcomponent {
+  display: flex;
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
