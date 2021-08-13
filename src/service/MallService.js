@@ -7,6 +7,11 @@ class MallService {
     return axios.get(Mall_API_BASE_URL);
   }
   // 도서 목록 가져오기
+
+  detailBook(bookid) {
+    return axios.get(Mall_API_BASE_URL + "/" + bookid);
+  }
+  // 해당 도서의 디테일 가져오기
 }
 
 export default new MallService();

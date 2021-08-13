@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import HeaderLayout from "./laytout/HeaderLayout";
 import FooterLayout from "./laytout/FooterLayout";
 import MainComponent from "./components/MainComponent";
-// import LoginComponent from "./components/LoginCompoenet";
-import "./App.css";
+import DetailComponent from "./components/DetailComponent";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={MainComponent}></Route>
             <Route path="/main" component={MainComponent}></Route>
-            {/* <Route path="/login" component={LoginComponent}></Route> */}
+            <Route path="/detail/:bookid" component={DetailComponent}></Route>
           </Switch>
         </Router>
       </div>

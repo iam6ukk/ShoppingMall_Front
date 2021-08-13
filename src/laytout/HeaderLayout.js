@@ -4,10 +4,10 @@ import Navigation from "../components/NavComponent";
 
 const HeaderLayout = () => {
   return (
-    <div className="header">
+    <header>
       <Navigation />
       <hr />
-    </div>
+    </header>
     // 네비게이션바 + 수평선
   );
 };

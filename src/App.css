@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  width: 100%;
+  height: 100vh;
 }
 
 .App-logo {
@@ -37,25 +39,38 @@
   }
 }
 
-.header {
-  margin-bottom: 30px;
+header {
+  margin-bottom: 50px;
 }
 
-.footer {
+footer {
   position: absolute;
-  left: 0;
-  height: 60px;
-  bottom: 0;
   width: 100%;
-  padding-top: 5px;
+  height: 100px;
+  bottom: 0;
   background-color: lightgray;
+  line-height: 100px;
 }
 
-.bookcomponent {
-  display: flex;
-  list-style: none;
-}
+/* .bookcontainer {
+  justify-content: space-evenly;
+} */
 
 li {
   list-style: none;
+}
+
+img {
+  width: 30px;
+  height: 300px;
+  /* object-fit: contain; */
+}
+
+.detailimg {
+  width: 80%;
+  height: 100%;
+}
+
+.book-btn {
+  margin-top: 100px;
 }
