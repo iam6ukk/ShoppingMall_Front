@@ -3,6 +3,7 @@ import MallService from "../service/MallService";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "@material-ui/core/Button";
 
+// 도서 디테일 페이지
 class DetailComponent extends Component {
   constructor(props) {
     super(props);
