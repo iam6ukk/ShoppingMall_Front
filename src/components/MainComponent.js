@@ -2,7 +2,19 @@ import React, { Component } from "react";
 import MallService from "../service/MallService";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// 쇼핑몰 메인 페이지
+// import surf1 from "../img/bookimg1.jpg";
+// import surf2 from "../img/bookimg2.jpg";
+// import surf3 from "../img/bookimg3.jpg";
+// import surf4 from "../img/bookimg4.jpg";
+// import surf5 from "../img/bookimg5.jpg";
+// import surf6 from "../img/bookimg6.jpg";
+// import surf7 from "../img/bookimg7.jpg";
+// import surf8 from "../img/bookimg8.jpg";
+// import surf19 from "../img/bookimg9.jpg";
+// import surf10 from "../img/bookimg10.jpg";
+// import surf11 from "../img/bookimg11.jpg";
+// import surf12 from "../img/bookimg12.jpg";
+
 class MainComponent extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +29,7 @@ class MainComponent extends Component {
 
   componentDidMount() {
     MallService.getBooks(this.state.pageNum).then((res) => {
-      console.log(res.data);
+      console.log(res);
       // 데이터 확인
       this.setState({
         books: res.data.list,
@@ -26,22 +38,49 @@ class MainComponent extends Component {
       });
     });
   }
+  // getBooks를 호출해 해당 페이지 번호의 데이터 받음
+
+  componentDidUpdate(prevProps, prevState) {
+    // 컴포넌트 업데이트 직후에 호출되는 메소드
+    if (prevState.pageNum !== this.state.pageNum) {
+      // 이전 페이지 번호와 현재 페이지 번호가 다르면
+      MallService.getBooks(this.state.pageNum).then((res) => {
+        // 현재 페이지 번호로 getBooks 호출
+        console.log(res.data);
+        // 데이터 확인
+        this.setState({
+          books: res.data.list,
+          pageNum: res.data.pageNum,
+          paging: res.data,
+        });
+      });
+    }
+  }
 
   detailBook(bookid) {
     this.props.history.push(`detail/${bookid}`);
   }
+  // 도서 상세, 해당 bookid의 상세 페이지로 이동
 
-  pageBook(pageNum) {
-    console.log("pageNum : " + pageNum);
-    // 해당 페이지 번호 확인
-    MallService.getBooks(pageNum).then((res) => {
-      this.setState({
-        pageNum: res.data.pageNum,
-        paging: res.data,
-        boards: res.data.list,
-      });
-      // 글 목록 + 페이징 객체도 같이 가져옴
+  // pageBook(pageNum) {
+  //   console.log("pageNum : " + pageNum);
+  //   // 해당 페이지 번호 확인
+  //   MallService.getBooks(pageNum).then((res) => {
+  //     this.setState({
+  //       pageNum: res.data.pageNum,
+  //       paging: res.data,
+  //       boards: res.data.list,
+  //     });
+  //     // 글 목록 + 페이징 객체도 같이 가져옴
+  //   });
+  // }
+
+  pageBook(i) {
+    console.log("pageNum : " + i);
+    this.setState({
+      pageNum: i,
     });
+    // 전달받은 페이지 번호 => i
   }
 
   viewPaging() {
@@ -61,7 +100,7 @@ class MainComponent extends Component {
     // 페이지 버튼 표시
 
     return pageNums.map((page) => (
-      <li className="page-item" key={page.toString()}>
+      <li className="page-item" key={page}>
         <a className="page-link" onClick={() => this.pageBook(page)}>
           {page}
         </a>

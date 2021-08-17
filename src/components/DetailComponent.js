@@ -3,7 +3,6 @@ import MallService from "../service/MallService";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "@material-ui/core/Button";
 
-// 도서 디테일 페이지
 class DetailComponent extends Component {
   constructor(props) {
     super(props);
@@ -39,10 +38,7 @@ class DetailComponent extends Component {
                   {this.state.book.bookname}
                 </strong>{" "}
                 <span>{this.state.book.author}</span>
-              </div>
-              <div className="book-info">
                 <br />
-                <p className="card-text">{this.state.book.description}</p>
                 <span className="card-text">
                   출판사: {this.state.book.publisher}
                 </span>{" "}
@@ -50,11 +46,18 @@ class DetailComponent extends Component {
                 <span className="card-text">
                   출판일: {this.state.book.publishdate}
                 </span>
+                <br />
+                <strong>{this.state.book.price}원</strong>
+                <hr />
+              </div>
+              <div className="book-info">
+                <br />
+                <p className="card-text">{this.state.book.description}</p>
               </div>
               <div className="book-btn">
                 <Button variant="outlined" color="primary" className="cart-btn">
                   장바구니
-                </Button>
+                </Button>{" "}
                 <Button variant="contained" color="primary" className="buy-btn">
                   구매하기
                 </Button>
