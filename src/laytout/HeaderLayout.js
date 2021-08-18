@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.css";
-import Navigation from "../components/NavComponent";
+// import Navigation from "../components/NavComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const HeaderLayout = () => {

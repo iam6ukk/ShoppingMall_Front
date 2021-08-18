@@ -28,4 +28,8 @@ function App() {
   );
 }
 
+export const SessionKey = {
+  LOGIN_SESSION: "LoginSession",
+};
+
 export default App;
