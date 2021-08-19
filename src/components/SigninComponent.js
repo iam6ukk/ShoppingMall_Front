@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import MallService from "../service/MallService";
 
 const SigninComponent = () => {
-  const [custid, setcustId] = useState("");
-  const [custpwd, setcustpwd] = useState("");
+  const [custId, setcustId] = useState("");
+  const [custPwd, setcustpwd] = useState("");
 
   const changeIdHandler = (event) => {
     setcustId(event.target.value);
@@ -21,10 +21,10 @@ const SigninComponent = () => {
     // 브라우저 고유 동작 막음
     // sign in 버튼 클릭 시 랜더링 막음
     let logInfo = {
-      custid: custid,
-      custpwd: custpwd,
+      custId: custId,
+      custPwd: custPwd,
     };
-    console.log("id: " + logInfo.custid + " / pwd: " + logInfo.custpwd);
+    console.log("id: " + logInfo.custId + " / pwd: " + logInfo.custPwd);
 
     MallService.signInUser(logInfo).then((res) => {
       console.log(res);
@@ -43,7 +43,7 @@ const SigninComponent = () => {
           <form>
             <div className="card-id">
               <TextField
-                id="custid"
+                id="custId"
                 label="아이디를 입력해주세요"
                 variant="outlined"
                 onChange={changeIdHandler}
@@ -52,7 +52,7 @@ const SigninComponent = () => {
             </div>
             <div className="card-pwd">
               <TextField
-                id="custpwd"
+                id="custPwd"
                 label="비밀번호를 입력해주세요"
                 variant="outlined"
                 type="password"

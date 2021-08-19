@@ -1,5 +1,4 @@
 import axios from "axios";
-import MainComponent from "../components/MainComponent";
 
 const Mall_API_BASE_URL = "http://localhost:8080/api/books";
 
@@ -15,7 +14,7 @@ class MallService {
   // 해당 도서의 디테일 가져오기
 
   signInUser(logInfo) {
-    return axios.post(Mall_API_BASE_URL, logInfo);
+    return axios.post(Mall_API_BASE_URL + "/login", logInfo);
   }
   // 로그인 정보 넘기기
 }
