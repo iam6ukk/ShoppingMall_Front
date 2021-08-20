@@ -15,10 +15,12 @@ class DetailComponent extends Component {
 
   componentDidMount() {
     MallService.detailBook(this.state.bookid).then((res) => {
+      // 해당 booid의 도서 정보 받기
       this.setState({ book: res.data });
+      console.log(res);
+      // 데이터 확인
     });
   }
-  // 해당 bookid의 도서 객체 가져옴
 
   render() {
     return (
@@ -27,7 +29,7 @@ class DetailComponent extends Component {
           <div className="col-md-4">
             <img
               src={this.state.book.bookurl}
-              className="detailimg" //"img-fluid rounded-start"
+              className="detailimg"
               alt="bookimg"
             />
           </div>
@@ -55,10 +57,10 @@ class DetailComponent extends Component {
                 <p className="card-text">{this.state.book.description}</p>
               </div>
               <div className="book-btn">
-                <Button variant="outlined" color="primary" className="cart-btn">
+                <Button variant="outlined" color="primary">
                   장바구니
-                </Button>{" "}
-                <Button variant="contained" color="primary" className="buy-btn">
+                </Button>
+                <Button variant="contained" color="primary">
                   구매하기
                 </Button>
               </div>

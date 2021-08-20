@@ -20,16 +20,16 @@ class MainComponent extends Component {
     super(props);
 
     this.state = {
-      books: [],
-      pageNum: 1, // 페이지 번호 저장
+      books: [], // 도서 목록 받기 위해 배열로 설정
+      pageNum: 1, // 페이지 번호 저장, 초기 1로 설정
       paging: {}, // 페이징 처리 객체
     };
-    // state 설정
   }
 
   componentDidMount() {
     MallService.getBooks(this.state.pageNum).then((res) => {
-      console.log(res);
+      // 해당 페이지 번호의 도서 목록 받기
+      // console.log(res);
       // 데이터 확인
       this.setState({
         books: res.data.list,
@@ -45,8 +45,8 @@ class MainComponent extends Component {
     if (prevState.pageNum !== this.state.pageNum) {
       // 이전 페이지 번호와 현재 페이지 번호가 다르면
       MallService.getBooks(this.state.pageNum).then((res) => {
-        // 현재 페이지 번호로 getBooks 호출
-        console.log(res.data);
+        // 현재 페이지 번호로 도서 목록 받기
+        // console.log(res.data);
         // 데이터 확인
         this.setState({
           books: res.data.list,
@@ -61,19 +61,6 @@ class MainComponent extends Component {
     this.props.history.push(`detail/${bookid}`);
   }
   // 도서 상세, 해당 bookid의 상세 페이지로 이동
-
-  // pageBook(pageNum) {
-  //   console.log("pageNum : " + pageNum);
-  //   // 해당 페이지 번호 확인
-  //   MallService.getBooks(pageNum).then((res) => {
-  //     this.setState({
-  //       pageNum: res.data.pageNum,
-  //       paging: res.data,
-  //       boards: res.data.list,
-  //     });
-  //     // 글 목록 + 페이징 객체도 같이 가져옴
-  //   });
-  // }
 
   pageBook(i) {
     console.log("pageNum : " + i);
@@ -90,14 +77,13 @@ class MainComponent extends Component {
 
     for (
       let i = this.state.paging.navigateFirstPage;
+      // i 초기값은 첫 페이지로 설정 (i = 1);
       i <= this.state.paging.navigateLastPage;
-      i++
+      i++ // 마지막 페이지까지 반복하며 1씩 증가
     ) {
       pageNums.push(i);
+      // 메인 페이지에 버튼 표시
     }
-    // i 초기값은 첫 페이지로 설정
-    // 마지막 페이지까지 반복하며 1씩 증가
-    // 페이지 버튼 표시
 
     return pageNums.map((page) => (
       <li className="page-item" key={page}>

@@ -1,34 +1,39 @@
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import MallService from "../service/MallService";
 
 const SigninComponent = () => {
-  const [custId, setcustId] = useState("");
-  const [custPwd, setcustpwd] = useState("");
+  const [custid, setcustId] = useState("");
+  const [custpwd, setcustPwd] = useState("");
+  const history = useHistory();
 
   const changeIdHandler = (event) => {
     setcustId(event.target.value);
   };
   const changePwdHandler = (event) => {
-    setcustpwd(event.target.value);
+    setcustPwd(event.target.value);
   };
   // TextField값 변경 시 핸들러 실행
   // 아이디, 패스워드 값 set
 
-  const SignInHandler = async function (event) {
+  const SignInHandler = (event) => {
     event.preventDefault();
     // 브라우저 고유 동작 막음
     // sign in 버튼 클릭 시 랜더링 막음
     let logInfo = {
-      custId: custId,
-      custPwd: custPwd,
+      custid: custid,
+      custpwd: custpwd,
     };
-    console.log("id: " + logInfo.custId + " / pwd: " + logInfo.custPwd);
+    console.log("id: " + logInfo.custid + " / pwd: " + logInfo.custpwd);
 
     MallService.signInUser(logInfo).then((res) => {
       console.log(res);
       // 데이터 확인
+      if (res.data.resultCode == 1) {
+        history.push("/main");
+      }
     });
   };
 
@@ -40,10 +45,10 @@ const SigninComponent = () => {
             <h3>로그인</h3>
             <hr />
           </div>
-          <form>
+          <form className="classes.root">
             <div className="card-id">
               <TextField
-                id="custId"
+                id="custid"
                 label="아이디를 입력해주세요"
                 variant="outlined"
                 onChange={changeIdHandler}
@@ -52,7 +57,7 @@ const SigninComponent = () => {
             </div>
             <div className="card-pwd">
               <TextField
-                id="custPwd"
+                id="custpwd"
                 label="비밀번호를 입력해주세요"
                 variant="outlined"
                 type="password"
