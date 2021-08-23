@@ -17,6 +17,10 @@ class MallService {
     return axios.post(Mall_API_BASE_URL + "/login", logInfo);
   }
   // 로그인 정보 넘기기
+
+  logOutUser() {
+    return axios.get(Mall_API_BASE_URL + "/logout");
+  }
 }
 
 export default new MallService();

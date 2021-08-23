@@ -3,8 +3,11 @@ import Button from "@material-ui/core/Button";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import MallService from "../service/MallService";
+// import { LoginHeaderLayout, LogoutHeaderLayout } from "../laytout/HeaderLayout";
+import LogoutNav from "../laytout/LogoutNav";
+import LoginNav from "../laytout/LoginNav";
 
-const SigninComponent = () => {
+const SigninComponent = (props) => {
   const [custid, setcustId] = useState("");
   const [custpwd, setcustPwd] = useState("");
   const history = useHistory();
@@ -26,55 +29,72 @@ const SigninComponent = () => {
       custid: custid,
       custpwd: custpwd,
     };
-    console.log("id: " + logInfo.custid + " / pwd: " + logInfo.custpwd);
+    console.log("id: " + logInfo.custid + " pwd: " + logInfo.custpwd);
 
-    MallService.signInUser(logInfo).then((res) => {
-      console.log(res);
-      // 데이터 확인
-      if (res.data.resultCode == 1) {
-        history.push("/main");
-      }
-    });
+    MallService.signInUser(logInfo)
+      .then((res) => {
+        console.log(res);
+        //데이터 확인
+        if (res.data.custid === custid) {
+          sessionStorage.setItem("LoginUser", custid);
+          // 브라우저 세션 설정
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        history.replace("/main");
+      });
   };
 
   return (
-    <div className="signin-contianer">
-      <div className="card">
-        <div className="card-body">
-          <div className="card-haad">
-            <h3>로그인</h3>
-            <hr />
+    <div>
+      {sessionStorage.getItem("LoginUser") == null ? (
+        <LogoutNav />
+      ) : (
+        // 세션의 key값이 null이면 LogoutNav 출력
+        <LoginNav />
+        // 새션의 key값이 LoginUser이면 LoginNav 출력
+      )}
+      <div className="signin-contianer">
+        <div className="card">
+          <div className="card-body">
+            <div className="card-haad">
+              <h3>로그인</h3>
+              <hr />
+            </div>
+            <form className="classes.root">
+              <div className="card-id">
+                <TextField
+                  id="custid"
+                  label="아이디를 입력해주세요"
+                  variant="outlined"
+                  onChange={changeIdHandler}
+                  style={{ width: "40%" }}
+                />
+              </div>
+              <div className="card-pwd">
+                <TextField
+                  id="custpwd"
+                  label="비밀번호를 입력해주세요"
+                  variant="outlined"
+                  type="password"
+                  onChange={changePwdHandler}
+                  style={{ width: "40%" }}
+                />
+              </div>
+              <div className="signin-btn">
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={SignInHandler}
+                >
+                  Login
+                </Button>
+              </div>
+            </form>
           </div>
-          <form className="classes.root">
-            <div className="card-id">
-              <TextField
-                id="custid"
-                label="아이디를 입력해주세요"
-                variant="outlined"
-                onChange={changeIdHandler}
-                style={{ width: "40%" }}
-              />
-            </div>
-            <div className="card-pwd">
-              <TextField
-                id="custpwd"
-                label="비밀번호를 입력해주세요"
-                variant="outlined"
-                type="password"
-                onChange={changePwdHandler}
-                style={{ width: "40%" }}
-              />
-            </div>
-            <div className="signin-btn">
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={SignInHandler}
-              >
-                Login
-              </Button>
-            </div>
-          </form>
         </div>
       </div>
     </div>

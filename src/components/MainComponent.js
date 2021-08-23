@@ -2,18 +2,23 @@ import React, { Component } from "react";
 import MallService from "../service/MallService";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// import surf1 from "../img/bookimg1.jpg";
-// import surf2 from "../img/bookimg2.jpg";
-// import surf3 from "../img/bookimg3.jpg";
-// import surf4 from "../img/bookimg4.jpg";
-// import surf5 from "../img/bookimg5.jpg";
-// import surf6 from "../img/bookimg6.jpg";
-// import surf7 from "../img/bookimg7.jpg";
-// import surf8 from "../img/bookimg8.jpg";
-// import surf19 from "../img/bookimg9.jpg";
-// import surf10 from "../img/bookimg10.jpg";
-// import surf11 from "../img/bookimg11.jpg";
-// import surf12 from "../img/bookimg12.jpg";
+import surf1 from "../img/bookimg1.jpg";
+import surf2 from "../img/bookimg2.jpg";
+import surf3 from "../img/bookimg3.jpg";
+import surf4 from "../img/bookimg4.jpg";
+import surf5 from "../img/bookimg5.jpg";
+import surf6 from "../img/bookimg6.jpg";
+import surf7 from "../img/bookimg7.jpg";
+import surf8 from "../img/bookimg8.jpg";
+import surf19 from "../img/bookimg9.jpg";
+import surf10 from "../img/bookimg10.jpg";
+import surf11 from "../img/bookimg11.jpg";
+import surf12 from "../img/bookimg12.jpg";
+
+import FooterLayout from "../laytout/FooterLayout";
+import { LoginHeaderLayout, LogoutHeaderLayout } from "../laytout/HeaderLayout";
+import LogoutNav from "../laytout/LogoutNav";
+import LoginNav from "../laytout/LoginNav";
 
 class MainComponent extends Component {
   constructor(props) {
@@ -133,44 +138,56 @@ class MainComponent extends Component {
 
   render() {
     return (
-      <div className="bookcontainer">
-        <div className="row row-cols-1 row-cols-md-3 g-4">
-          {this.state.books.map((book) => (
-            <li key={book.bookid}>
-              <div className="col">
-                <div
-                  className="card"
-                  onClick={() => this.detailBook(book.bookid)}
-                >
-                  <img
-                    src={book.bookurl}
-                    className="card-img-top"
-                    alt="bookimg"
-                  />
-                  <div className="card-body">
-                    <strong className="card-title">{book.bookname}</strong>
-                    <br />
-                    <span className="card-text">{book.author}</span>
-                    <br />
-                    <span className="card-text">{book.publisher}</span>
-                    <br />
-                    <strong className="card-text">{book.price}원</strong>
+      <div>
+        {sessionStorage.getItem("LoginUser") == null ? (
+          <LogoutNav />
+        ) : (
+          // 세션의 key값이 null이면 LogoutNav 출력
+          <LoginNav />
+          // 새션의 key값이 LoginUser이면 LoginNav 출력
+        )}
+
+        <div className="container">
+          <div className="bookcontainer">
+            <div className="row row-cols-1 row-cols-md-3 g-4">
+              {this.state.books.map((book) => (
+                <li key={book.bookid}>
+                  <div className="col">
+                    <div
+                      className="card"
+                      onClick={() => this.detailBook(book.bookid)}
+                    >
+                      <img
+                        src={book.bookurl}
+                        className="card-img-top"
+                        alt="bookimg"
+                      />
+                      <div className="card-body">
+                        <strong className="card-title">{book.bookname}</strong>
+                        <br />
+                        <span className="card-text">{book.author}</span>
+                        <br />
+                        <span className="card-text">{book.publisher}</span>
+                        <br />
+                        <strong className="card-text">{book.price}원</strong>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </li>
-          ))}
+                </li>
+              ))}
+            </div>
+            <div className="row">
+              <nav aria-label="Page navigation example">
+                <ul className="pagination justify-content-center">
+                  {this.isMoveToFirstPage()}
+                  {this.viewPaging()}
+                  {this.isMoveToLastPage()}
+                </ul>
+              </nav>
+            </div>
+            {/* 페이징 출력 */}
+          </div>
         </div>
-        <div className="row">
-          <nav aria-label="Page navigation example">
-            <ul className="pagination justify-content-center">
-              {this.isMoveToFirstPage()}
-              {this.viewPaging()}
-              {this.isMoveToLastPage()}
-            </ul>
-          </nav>
-        </div>
-        {/* 페이징 출력 */}
       </div>
     );
   }
