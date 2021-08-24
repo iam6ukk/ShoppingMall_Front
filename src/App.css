@@ -100,15 +100,23 @@ img {
   margin-bottom: 30px;
 }
 
-.card-pwd2 {
+.card-pwdcheck {
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
+.card-address {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.card-detailaddress {
+  margin-bottom: 30px;
+}
 .signin-btn {
   margin-bottom: 30px;
 }
 
 .navbar-nav {
-  margin-right: 70%;
+  margin-right: 60%;
 }

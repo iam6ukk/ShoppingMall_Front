@@ -18,9 +18,19 @@ class MallService {
   }
   // 로그인 정보 넘기기
 
+  signUpUser(custInfo) {
+    return axios.post(Mall_API_BASE_URL + "/signup", custInfo);
+  }
+  // 회원 가입
+  custIdCheck(custid) {
+    return axios.post(Mall_API_BASE_URL + "/signup/idcheck", custid);
+  }
+  // 아이디 중복 확인
+
   logOutUser() {
     return axios.get(Mall_API_BASE_URL + "/logout");
   }
+  //  로그아웃
 }
 
 export default new MallService();

@@ -7,7 +7,7 @@ import MallService from "../service/MallService";
 import LogoutNav from "../laytout/LogoutNav";
 import LoginNav from "../laytout/LoginNav";
 
-const SigninComponent = (props) => {
+const SigninComponent = () => {
   const [custid, setcustId] = useState("");
   const [custpwd, setcustPwd] = useState("");
   const history = useHistory();
@@ -21,8 +21,8 @@ const SigninComponent = (props) => {
   // TextField값 변경 시 핸들러 실행
   // 아이디, 패스워드 값 set
 
-  const SignInHandler = (event) => {
-    event.preventDefault();
+  const SignInHandler = () => {
+    // event.preventDefault();
     // 브라우저 고유 동작 막음
     // sign in 버튼 클릭 시 랜더링 막음
     let logInfo = {
@@ -48,6 +48,14 @@ const SigninComponent = (props) => {
       });
   };
 
+  const onCheckEnter = (event) => {
+    if (event.key === "Enter") {
+      SignInHandler();
+    }
+    // 키 이벤트(엔터) 발생 시
+    // SignInHandler함수 실행
+  };
+
   return (
     <div>
       {sessionStorage.getItem("LoginUser") == null ? (
@@ -64,7 +72,7 @@ const SigninComponent = (props) => {
               <h3>로그인</h3>
               <hr />
             </div>
-            <form className="classes.root">
+            <form onKeyPress={onCheckEnter}>
               <div className="card-id">
                 <TextField
                   id="custid"

@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core";
 import React from "react";
 import MallService from "../service/MallService";
 
-const LoginNav = (props) => {
+function LoginNav(props) {
   const onClickLogout = () => {
     sessionStorage.removeItem("LoginUser");
     // Loginuser 세션 삭제 (remtoeItem = 특정 세션 삭제)
@@ -18,11 +18,6 @@ const LoginNav = (props) => {
           </a>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <a className="nav-link active" href="/signup">
-                {/*aria-current="page" */}
-                회원가입
-              </a>
-              {/* 회원가입 페이지 이동 */}
               <a
                 className="nav-link active"
                 href="/main"
@@ -31,19 +26,27 @@ const LoginNav = (props) => {
                 로그아웃
               </a>
               {/* 로그아웃 */}
+              <a className="nav-link active" href="/mypage">
+                {/*aria-current="page" */}
+                마이페이지
+              </a>
+              {/* 마이 페이지 이동 */}
               <a className="nav-link active" href="/cart">
                 장바구니
               </a>
               {/* 장바구니 페이지 이동 */}
             </div>
             <div>
-              <Typography>{props.custid}님 반갑습니다.</Typography>
+              <Typography>
+                {window.sessionStorage.getItem("LoginUser")}님 반갑습니다.
+              </Typography>
+              {/* 로그인한 회원 아이디 출력 */}
             </div>
           </div>
         </div>
       </nav>
     </header>
   );
-};
+}
 
 export default LoginNav;
