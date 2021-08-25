@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import MallService from "../service/MallService";
 // import { makeStyles } from "@material-ui/core/styles";
 import DaumPostcode from "react-daum-postcode";
+// import Modal from "@material-ui/core/Modal";
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -26,7 +27,7 @@ const SignupComponent = () => {
   const [custpw, setcustPwd] = useState("");
   const [custpwdcheck, setcustPwdCheck] = useState(""); // 비밀번호 2차 확인
   const [address, setAddress] = useState(""); // 주소
-  const [addressDetail, setAddressDetail] = useState(""); // 상세 주소
+  // const [addressDetail, setAddressDetail] = useState(""); // 상세 주소
 
   const [isOpenPost, setIsOpenPost] = useState(false); // post기본상태 false
 
@@ -45,14 +46,19 @@ const SignupComponent = () => {
   const changeAddressHandler = (event) => {
     setAddress(event.target.value);
   };
-  const changeAddressDetailHandler = (evnet) => {
-    setAddressDetail(evnet.target.value);
-  };
+  // const changeAddressDetailHandler = (evnet) => {
+  //   setAddressDetail(evnet.target.value);
+  // };
   // 텍스트 필드 값 변경시 핸들러 실행 -> 각 값 set
 
   const custidCheckHandler = () => {
     MallService.custIdCheck(custid).then((res) => {
-      console.log(res.data);
+      console.log(res);
+      if (res.data == 0) {
+        alert("사용가능 한 아이디 입니다.");
+      } else if (res.data == 1) {
+        alert("사용할 수 없는 아이디 입니다.");
+      }
     });
   };
   // 아이디 중복 검사
@@ -66,27 +72,29 @@ const SignupComponent = () => {
   // 주소창 true
 
   const onCompletePost = (data) => {
-    let fullAddr = data.address; // 도로명 주소
     console.log(data);
-    let extraAddr = "";
 
-    if (data.addressType === "R") {
-      // 도로명 주소 선택 시
-      if (data.bname !== "") {
-        extraAddr += data.bname;
-        // 법정동명이 있을 경우
-      }
-      if (data.buildingName !== "") {
-        extraAddr +=
-          extraAddr !== "" ? `, ${data.buildingName}` : data.buildingName;
-      }
-      // 건물명이 있고 공용 주택일 경우
+    setAddress(data.address);
+    // let fullAddr = data.address; // 도로명 주소
+    // let extraAddr = "";
 
-      fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
-    }
+    // if (data.addressType === "R") {
+    //   // 도로명 주소 선택 시
+    //   if (data.bname !== "") {
+    //     extraAddr += data.bname;
+    //     // 법정동명이 있을 경우
+    //   }
+    //   if (data.buildingName !== "") {
+    //     extraAddr +=
+    //       extraAddr !== "" ? `, ${data.buildingName}` : data.buildingName;
+    //   }
+    //   // 건물명이 있고 공용 주택일 경우
 
-    setAddress(fullAddr);
-    setAddressDetail(extraAddr);
+    //   fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
+    // }
+
+    // setAddress(fullAddr);
+    // setAddressDetail(extraAddr);
     setIsOpenPost(false);
   };
 
@@ -196,8 +204,6 @@ const SignupComponent = () => {
                 <Button variant="contained" onClick={onChangeOpenPost}>
                   우편번호검색
                 </Button>
-              </div>
-              <div>
                 {isOpenPost ? (
                   <DaumPostcode
                     style={postCodeStyle}
@@ -206,7 +212,8 @@ const SignupComponent = () => {
                   />
                 ) : null}
               </div>
-              <div className="card-detailaddress">
+
+              {/* <div className="card-detailaddress">
                 <TextField
                   id="addressDetail"
                   label="상세주소입력"
@@ -214,9 +221,8 @@ const SignupComponent = () => {
                   style={{ width: "30%" }}
                   onChange={changeAddressDetailHandler}
                 />
-              </div>
+              </div> */}
 
-              {/* 주소 (modal) */}
               <div className="signin-btn">
                 <Button
                   variant="outlined"

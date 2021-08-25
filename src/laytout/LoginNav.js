@@ -38,7 +38,7 @@ function LoginNav(props) {
             </div>
             <div>
               <Typography>
-                {window.sessionStorage.getItem("LoginUser")}님 반갑습니다.
+                {window.sessionStorage.getItem("LoginUser")} 님 반갑습니다.
               </Typography>
               {/* 로그인한 회원 아이디 출력 */}
             </div>

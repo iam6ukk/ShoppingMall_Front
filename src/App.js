@@ -7,6 +7,7 @@ import MainComponent from "./components/MainComponent";
 import DetailComponent from "./components/DetailComponent";
 import SigninComponent from "./components/SigninComponent";
 import SignupComponent from "./components/SignupComponent";
+import PurchaseComponent from "./components/PurchaseComponent";
 
 function App() {
   return (
@@ -15,10 +16,10 @@ function App() {
         <Switch>
           <Route path="/" exact component={MainComponent}></Route>
           <Route path="/main" component={MainComponent}></Route>
-
           <Route path="/signin" component={SigninComponent}></Route>
           <Route path="/signup" component={SignupComponent}></Route>
           <Route path="/detail/:bookid" component={DetailComponent}></Route>
+          <Route path="/purchase" component={PurchaseComponent}></Route>
         </Switch>
       </Router>
       <div>

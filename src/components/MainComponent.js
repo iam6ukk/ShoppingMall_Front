@@ -194,26 +194,3 @@ class MainComponent extends Component {
 }
 
 export default MainComponent;
-
-// <div className="bookcontainer">
-//   {this.state.books.map((book) => (
-//     <li key={book.bookid}>
-//       <div className="booklist">
-//         <div className="bookimg">
-//           <img src={surf} alt="img" />
-//         </div>
-//         <div className="booktitle">
-//           <strong>{book.bookname}</strong>
-//         </div>
-//         <div className="bookinfo">
-//           <span>{book.author}</span>
-//           <br />
-//           <span>{book.publisher}</span>
-//           <br />
-//           <strong>{book.price}원</strong>
-//         </div>
-//       </div>
-//     </li>
-//   ))}
-// </div>
-// 도서 목록 나열

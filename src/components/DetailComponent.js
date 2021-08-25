@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "@material-ui/core/Button";
 import LogoutNav from "../laytout/LogoutNav";
 import LoginNav from "../laytout/LoginNav";
+import { Typography } from "@material-ui/core";
 
 class DetailComponent extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class DetailComponent extends Component {
     this.state = {
       book: {},
       bookid: this.props.match.params.bookid,
+      count: 1,
     };
   }
 
@@ -22,6 +24,25 @@ class DetailComponent extends Component {
       console.log(res);
       // 데이터 확인
     });
+  }
+
+  onIncrease() {
+    this.setState({
+      count: (this.state.count += 1),
+    });
+  }
+  onDecrease() {
+    this.setState({
+      count: (this.state.count -= 1),
+    });
+  }
+
+  goCart() {
+    this.props.history.push("/cart");
+  }
+
+  goPurchase(bookid) {
+    this.props.history.push(`/purchase/${bookid}`);
   }
 
   render() {
@@ -67,11 +88,31 @@ class DetailComponent extends Component {
                     <br />
                     <p className="card-text">{this.state.book.description}</p>
                   </div>
+                  <div className="count">
+                    <Typography variant="h6">{this.state.count}</Typography>
+                    <Button
+                      variant="contained"
+                      onClick={() => this.onDecrease()}
+                    >
+                      -1
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={() => this.onIncrease()}
+                    >
+                      +1
+                    </Button>
+                    {/* 상품 카운트 버튼 구현 */}
+                  </div>
                   <div className="book-btn">
                     <Button variant="outlined" color="primary">
                       장바구니
-                    </Button>
-                    <Button variant="contained" color="primary">
+                    </Button>{" "}
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => this.goPurchase()}
+                    >
                       구매하기
                     </Button>
                   </div>

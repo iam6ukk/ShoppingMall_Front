@@ -31,6 +31,11 @@ class MallService {
     return axios.get(Mall_API_BASE_URL + "/logout");
   }
   //  로그아웃
+
+  purchaseBook(bookid) {
+    return axios.get(Mall_API_BASE_URL + "/purchase" + bookid);
+  }
+  // 도서 구매 (해당 bookid)
 }
 
 export default new MallService();

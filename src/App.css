@@ -72,7 +72,8 @@ img {
 }
 
 .book-btn {
-  margin-top: 100px;
+  padding: 20px;
+  margin-top: 20px;
 }
 
 .row {
@@ -119,4 +120,12 @@ img {
 
 .navbar-nav {
   margin-right: 60%;
+}
+
+.col-md-4 {
+  margin-bottom: 30px;
+}
+
+.count {
+  margin-top: 40px;
 }
